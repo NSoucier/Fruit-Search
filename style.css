@@ -36,6 +36,7 @@ ul.has-suggestions {
 }
 ul li {
   /* TODO */
+  list-style: none;
 }
 ul li:hover {
   /* TODO */
