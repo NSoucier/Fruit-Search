@@ -1,11 +1,3 @@
-// DELETE THIS
-// css style to create color gradient on background of body
-// dipslay search input type centered on viewport with placeholder search fruit with emojis
-// as user starts typing, display text(with different background color) of matches below
-//		addEventListeners for "keydown", update dropdown in here
-// as mouse hovers over options, change background color
-// when option is clicked on, add text to search bar input as 'value'
-
 const input = document.querySelector('#fruit');
 const suggestions = document.querySelector('.suggestions ul');
 const selection = document.querySelector('ul');
@@ -26,6 +18,7 @@ function searchHandler(e) {
 	let char = e.key.toLowerCase();
 	if (char === 'backspace') { // removes character from userInput string
 		userInput = userInput.slice(0, -1);
+		if (input.value === "") {userInput = '';}
 	} else if (regex.test(char) && char.length === 1) { // checks if it's in the alphabet (or space) and only one character (avoids 'enter', etc.) 
 		userInput = userInput + char;
 	} else {
@@ -38,30 +31,39 @@ function searchHandler(e) {
 }
 
 function showSuggestions(results, inputVal) {
-	for (frt of results) {
-		const item = document.createElement('li');
-		// adds fruit from list to dropdown with the user input style as BOLD
-		item.innerHTML = `${frt.slice(0, frt.indexOf(inputVal))}<b>${inputVal}</b>${frt.slice(frt.indexOf(inputVal)+inputVal.length)}`
-		suggestions.appendChild(item);
+	if (input.value === "") { // clear suggestions if there's no input
+		suggestions.innerHTML = '';
+	} else {
+		for (frt of results) {
+			const item = document.createElement('li');
+			// adds fruit from list to dropdown with the user input style as BOLD
+			//item.innerHTML = `${frt.slice(0, frt.indexOf(inputVal))}<b>${inputVal}</b>${frt.slice(frt.indexOf(inputVal)+inputVal.length)}`
+			item.style.backgroundColor = '#ffcb8f';
+			item.innerText = frt;
+			suggestions.appendChild(item);
+		}
 	}
 	
-
-	// bold the letters that are typed
 }
 
 function useSuggestion(e) {
 	// code when user clicks on dropdown item and adds value to input
+	input.value = e.target.innerText;
+
+	// clear prior suggestions list
+	suggestions.innerHTML = '';
+
 }
 
-// START HERE: couldn't get right selector to change background color 
-// highlights selection of mouseover
+// highlights selection of ONLY mouseover
 function highlightFruit(e) {
-	console.log(e.target)
-	e.target.parentElement.style.backgroundColor = 'white';
+
+	const list = selection.children;
+	[...list].forEach(li => li.style.backgroundColor = '#ffcb8f');
 	e.target.style.backgroundColor = 'orange';
 
 }
 
 input.addEventListener('keyup', searchHandler);
 suggestions.addEventListener('click', useSuggestion);
-suggestions.addEventListener('mouseover', highlightFruit);
+selection.addEventListener('mouseover', highlightFruit);
