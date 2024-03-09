@@ -1,51 +1,21 @@
-* {
-  /* box-sizing: border-box; */
-}
-
-:focus {
-  outline: none !important;
-  border:2px solid rgb(255, 128, 0);
-  box-shadow: 0 0 10px rgb(255, 128, 0); 
-}
-
 body {
-  background-color: #f5a03e;
   background: linear-gradient(to right, rgb(255, 213, 0) , rgb(255, 115, 0));
 }
 
-input {
-  background-color: #ffcb8f;
-  border-color: rgb(255, 128, 0);
-}
-
 .search-container {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%,0);
-}
-.search-container input,
-.search-container .suggestions {
-  /* TODO */
-}
-.search-container input {
- /* TODO */
-}
-.search-container .suggestions {
-   /* TODO */
+  margin-left: 50%;
+  margin-top: 20%;
+  transform: translate(-100px,0);
 }
 
 ul {
   margin: 0;
   padding: 0;
+  width: 200px;
 }
-ul.has-suggestions {
-  /* TODO */
-}
+
 ul li {
-  /* TODO */
   list-style: none;
+  width: 200px;
 }
-ul li:hover {
-  /* TODO */
-}
+

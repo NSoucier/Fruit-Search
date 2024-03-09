@@ -19,7 +19,7 @@ function searchHandler(e) {
 	if (char === 'backspace') { // removes character from userInput string
 		userInput = userInput.slice(0, -1);
 		if (input.value === "") {userInput = '';}
-	} else if (regex.test(char) && char.length === 1) { // checks if it's in the alphabet (or space) and only one character (avoids 'enter', etc.) 
+	} else if (regex.test(char) && char.length === 1 || char === ' ') { // checks if it's in the alphabet (or space) and only one character (avoids 'enter', etc.) 
 		userInput = userInput + char;
 	} else {
 		alert ('Please only enter a letter from the alphabet');
@@ -52,7 +52,6 @@ function useSuggestion(e) {
 
 	// clear prior suggestions list
 	suggestions.innerHTML = '';
-
 }
 
 // highlights selection of ONLY mouseover
