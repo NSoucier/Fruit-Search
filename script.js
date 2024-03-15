@@ -1,36 +1,36 @@
 const input = document.querySelector('#fruit');
 const suggestions = document.querySelector('.suggestions ul');
 const selection = document.querySelector('ul');
+const dropdown = document.querySelector('.suggestions');
 
 const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry', 'Boysenberry', 'Currant', 'Cherry', 'Coconut', 'Cranberry', 'Cucumber', 'Custard apple', 'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Gooseberry', 'Grape', 'Raisin', 'Grapefruit', 'Guava', 'Honeyberry', 'Huckleberry', 'Jabuticaba', 'Jackfruit', 'Jambul', 'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Longan', 'Lychee', 'Mango', 'Mangosteen', 'Marionberry', 'Melon', 'Cantaloupe', 'Honeydew', 'Watermelon', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive', 'Orange', 'Clementine', 'Mandarine', 'Tangerine', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Plantain', 'Plum', 'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Salmonberry', 'Rambutan', 'Redcurrant', 'Salak', 'Satsuma', 'Soursop', 'Star fruit', 'Strawberry', 'Tamarillo', 'Tamarind', 'Yuzu'];
-const lowerCaseFruit = fruit.map(frt => frt.toLowerCase());
+// const lowerCaseFruit = fruit.map(frt => frt.toLowerCase());
 const regex = /^[a-zA-Z]+$/; // alphabet (A-Z or a-z)
 
 // function that returns list of fruits that contain the string (whatever keys have been pressed)
-const search = str => lowerCaseFruit.filter(fruit => fruit.includes(str));
+const search = str => fruit.filter(fr => fr.toLowerCase().includes(str.toLowerCase()));
 
-let userInput = '';
-const dropdown = document.querySelector('.suggestions');
 function searchHandler(e) {
 	// clear prior suggestions list
 	suggestions.innerHTML = '';
+	let userInput =e.target.value;
 
-	let char = e.key.toLowerCase();
-	if (char === 'backspace') { // removes character from userInput string
-		userInput = userInput.slice(0, -1);
-		if (input.value === "") {userInput = '';}
-	} else if (regex.test(char) && char.length === 1 || char === ' ') { // checks if it's in the alphabet (or space) and only one character (avoids 'enter', etc.) 
-		userInput = userInput + char;
-	} else {
-		alert ('Please only enter a letter from the alphabet');
-		userInput = userInput + char;
-	}
+	// let char = e.key.toLowerCase();
+	// if (char === 'backspace') { // removes character from userInput string
+	// 	userInput = userInput.slice(0, -1);
+	// 	if (input.value === "") {userInput = '';}
+	// } else if (regex.test(char) && char.length === 1 || char === ' ') { // checks if it's in the alphabet (or space) and only one character (avoids 'enter', etc.) 
+	// 	userInput = userInput + char;
+	// } else {
+	// 	alert ('Please only enter a letter from the alphabet');
+	// 	userInput = userInput + char;
+	// }
 
 	// only input list of first 5 matching results to showSuggestions
-	showSuggestions(search(userInput).slice(0,5), userInput);
+	showSuggestions(search(userInput).slice(0,5));
 }
 
-function showSuggestions(results, inputVal) {
+function showSuggestions(results) {
 	if (input.value === "") { // clear suggestions if there's no input
 		suggestions.innerHTML = '';
 	} else {
